@@ -6,20 +6,51 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
+    "@types/body-parser": "^1.19.0",
+    "@types/cookie-session": "^2.0.41",
+    "@types/cors": "^2.8.7",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.8",
+    "@types/helmet": "^0.0.48",
+    "@types/jest": "^26.0.13",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/supertest": "^2.0.10",
+    "axios": "^0.20.0",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "cookie": "^0.4.1",
+    "cookie-session": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.1.1",
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
-    "typescript": "~3.7.2"
+    "reflect-metadata": "^0.1.13",
+    "session": "^0.1.0",
+    "supertest": "^4.0.2",
+    "ts-loader": "^8.0.3",
+    "typescript": "~3.7.2",
+    "wait-on": "^5.2.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-node-externals": "^2.5.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "concurrently -p name -c \"yellow,magenta,blue\" -n \"webpack-server,nodemon-server,CRA\" \"yarn dev:server:webpack\" \"yarn dev:server:nodemon\" \"yarn dev:client\"",
+    "dev:client": "wait-on -l tcp:3003 && react-scripts start",
+    "dev:server": "concurrently -p name -c \"yellow,magenta\" -n \"webpack-server,nodemon-server\" \"yarn dev:server:webpack\" \"yarn dev:server:nodemon\"",
+    "dev:server:webpack": "webpack --config webpack.config.server.js --watch",
+    "dev:server:nodemon": "rm -f build/server.js && wait-on -l build/server.js && nodemon build/server.js",
+    "build": "yarn build:client && yarn build:backend",
+    "build:client": "react-scripts build",
+    "build:server": "webpack --config webpack.config.server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -35,5 +66,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "ts-jest": "^26.3.0"
   }
 }

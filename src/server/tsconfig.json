@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist",
+    "noEmit": false,
+    "sourceMap": true,
+    "module": "esnext",
+    "strict": true,
+    "target": "esnext",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "declaration": false,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["../../build", "../client"],
+  "include": ["."]
+}
